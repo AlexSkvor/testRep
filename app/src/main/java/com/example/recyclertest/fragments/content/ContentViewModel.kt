@@ -19,7 +19,7 @@ class ContentViewModel(
 
     var isFavorite: Boolean = false
 
-    private val itemChangeListener = { getItems() }
+    private val itemChangeListener = {  }
 
     init {
         repository.addItemChangeListener(itemChangeListener)
@@ -27,14 +27,6 @@ class ContentViewModel(
 
     fun changeFavoriteState(item: ItemModel, favorite: Boolean) {
         repository.setFavorite(item, favorite)
-    }
-
-    fun getItems() {
-        /*_items.value = if (isFavorite) {
-            repository.items.filter { it.isFavorite }
-        } else {
-            repository.items
-        }*/
     }
 
     override fun onCleared() {
