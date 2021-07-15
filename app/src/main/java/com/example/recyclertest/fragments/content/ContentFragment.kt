@@ -28,7 +28,7 @@ class ContentFragment : Fragment(), ItemFavoriteClickListener {
         val isFavorite = arguments?.getBoolean(ONLY_FAVORITES_KEY, false) ?: false
         viewModel.isFavorite = isFavorite
 
-        viewModel.items.observe(this) {
+        viewModel.items.observe(viewLifecycleOwner) {
             adapter?.items = it
         }
 
