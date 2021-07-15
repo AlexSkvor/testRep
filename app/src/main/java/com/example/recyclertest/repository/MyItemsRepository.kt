@@ -10,7 +10,4 @@ interface MyItemsRepository {
 
     fun setFavorite(itemModel: ItemModel, isFavorite: Boolean)
 
-    fun addItemChangeListener(listener: () -> Unit)
-
-    fun removeItemChangeListener(listener: () -> Unit)
 }

@@ -69,22 +69,11 @@ class MyItemsRepositoryImpl private constructor() : MyItemsRepository {
         )
     )
 
-    private val listeners = mutableListOf<() -> Unit>()
-
     private val _itemsLiveData = MutableLiveData(startingItems)
     override val items: LiveData<List<ItemModel>> = _itemsLiveData
 
     override fun setFavorite(itemModel: ItemModel, isFavorite: Boolean) {
         itemModel.isFavorite = isFavorite
-        listeners.forEach { it.invoke() }
-    }
-
-    override fun addItemChangeListener(listener: () -> Unit) {
-        listeners.add(listener)
-    }
-
-    override fun removeItemChangeListener(listener: () -> Unit) {
-        listeners.remove(listener)
     }
 
     override fun saveNewItem(item: ItemModel) {
