@@ -22,20 +22,16 @@ class ContentFragment : Fragment(), ItemFavoriteClickListener {
 
     private var adapter: MyItemModelsAdapter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val isFavorite = arguments?.getBoolean(ONLY_FAVORITES_KEY, false) ?: false
         viewModel.isFavorite = isFavorite
-
-        viewModel.getItems()
 
         viewModel.items.observe(this) {
             adapter?.items = it
         }
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         recyclerView?.layoutManager = LinearLayoutManager(context)
 
         adapter = MyItemModelsAdapter(this)
