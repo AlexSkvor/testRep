@@ -73,7 +73,13 @@ class MyItemsRepositoryImpl private constructor() : MyItemsRepository {
     override val items: LiveData<List<ItemModel>> = _itemsLiveData
 
     override fun setFavorite(itemModel: ItemModel, isFavorite: Boolean) {
-        itemModel.isFavorite = isFavorite
+        val newItem = itemModel.copy(isFavorite = isFavorite)
+        val oldList = items.value.orEmpty()
+        val newList = oldList.map {
+            if (it.id == newItem.id) newItem
+            else it
+        }
+        _itemsLiveData.postValue(newList)
     }
 
     override fun saveNewItem(item: ItemModel) {
