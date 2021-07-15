@@ -6,6 +6,6 @@ data class ItemModel(
     val title: String,
     val description: String,
     val date: Date,
-    var isFavorite: Boolean,
+    val isFavorite: Boolean,
     val id: String = UUID.randomUUID().toString(),
 )
