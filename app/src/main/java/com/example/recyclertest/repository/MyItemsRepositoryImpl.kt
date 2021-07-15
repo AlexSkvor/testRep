@@ -91,7 +91,6 @@ class MyItemsRepositoryImpl private constructor() : MyItemsRepository {
         val oldList = items.value.orEmpty()
         val newList = oldList + item
         _itemsLiveData.postValue(newList)
-        items.add(item)
     }
 
     companion object {
