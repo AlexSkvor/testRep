@@ -19,19 +19,8 @@ class ContentViewModel(
 
     var isFavorite: Boolean = false
 
-    private val itemChangeListener = {  }
-
-    init {
-        repository.addItemChangeListener(itemChangeListener)
-    }
-
     fun changeFavoriteState(item: ItemModel, favorite: Boolean) {
         repository.setFavorite(item, favorite)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        repository.removeItemChangeListener(itemChangeListener)
     }
 
     class Factory : ViewModelProvider.Factory {
