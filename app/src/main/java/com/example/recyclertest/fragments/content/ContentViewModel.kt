@@ -1,9 +1,6 @@
 package com.example.recyclertest.fragments.content
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.example.recyclertest.fragments.ItemModel
 import com.example.recyclertest.repository.MyItemsRepository
 import com.example.recyclertest.repository.MyItemsRepositoryImpl
@@ -12,9 +9,13 @@ class ContentViewModel(
     private val repository: MyItemsRepository
 ) : ViewModel() {
 
-    private val _items: MutableLiveData<List<ItemModel>> = MutableLiveData()
-    val items: LiveData<List<ItemModel>>
-        get() = _items
+    val items: LiveData<List<ItemModel>> by lazy {
+        if (isFavorite)
+            Transformations.map(repository.items) {
+                it.filter { item -> item.isFavorite }
+            }
+        else repository.items
+    }
 
     var isFavorite: Boolean = false
 
@@ -29,11 +30,11 @@ class ContentViewModel(
     }
 
     fun getItems() {
-        _items.value = if (isFavorite) {
+        /*_items.value = if (isFavorite) {
             repository.items.filter { it.isFavorite }
         } else {
             repository.items
-        }
+        }*/
     }
 
     override fun onCleared() {
