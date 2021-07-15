@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.recyclertest.fragments.ItemModel
@@ -41,12 +42,17 @@ class NewItemActivity : AppCompatActivity() {
             checkStateTitleLayout()
             checkStateDescriptionLayout()
 
-            val newItem = ItemModel(title = String(), description = String(), isFavorite = false, date = Date())
+            val newItem = ItemModel(
+                title = editTitle.text.toString(),
+                description = editDescription.text.toString(),
+                isFavorite = false,
+                date = Date()
+            )
 
             viewModel.saveNewItem(newItem)
 
-//            Toast.makeText(this, "New item added", Toast.LENGTH_SHORT).show()
-//            finish()
+            Toast.makeText(this, "New item added", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
         textChangedListener()
