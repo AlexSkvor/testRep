@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RecyclerTest</string>
+    <string name="editTitle">Title</string>
+    <string name="editDescription">Description</string>
+    <string name="editDate">Date</string>
+    <string name="saveButton">Save</string>
+    <string name="fieldIsRequired">Field is required.</string>
+</resources>
