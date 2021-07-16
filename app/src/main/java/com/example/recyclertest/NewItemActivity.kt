@@ -39,7 +39,8 @@ class NewItemActivity : AppCompatActivity() {
         }
 
         saveButton.setOnClickListener {
-            checkStateTitleLayout()
+            if (checkStateTitleLayout()) return@setOnClickListener
+
             checkStateDescriptionLayout()
 
             val newItem = ItemModel(
@@ -74,12 +75,15 @@ class NewItemActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    private fun checkStateTitleLayout() {
+    private fun checkStateTitleLayout(): Boolean {
         val titleLayout = findViewById<TextInputLayout>(R.id.editTitleLayout)
         val checkTitleLayoutState = titleLayout.editText?.text?.toString()
         val fieldIsRequired = getString(R.string.fieldIsRequired)
 
-        if (checkTitleLayoutState!!.isEmpty()) titleLayout.error = fieldIsRequired
+        val error: Boolean = checkTitleLayoutState!!.isEmpty()
+        if (error) titleLayout.error = fieldIsRequired
+
+        return error
     }
 
     private fun checkStateDescriptionLayout() {
